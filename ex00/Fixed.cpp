@@ -6,7 +6,7 @@
 /*   By: aimokhta <aimokhta@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 14:52:06 by aimokhta          #+#    #+#             */
-/*   Updated: 2025/08/30 17:47:22 by aimokhta         ###   ########.fr       */
+/*   Updated: 2025/08/30 18:57:24 by aimokhta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ Fixed::Fixed( const Fixed &other )
 // operator= - special function name that defines what '=' means for this class
 // “I’m defining what happens when you assign one Fixed object to another with =.”
 // () - parameter - the obj you're copying from
+// &other (in param) = passing by reference
+// &other in {} = address of pointer, coz 'this' is pointer to curr obj, prevent self assign ( a = a )
 Fixed &Fixed::operator=( const Fixed &other )       
 {
     std::cout << "Copy assignment operator called" << std::endl;
@@ -42,6 +44,7 @@ Fixed &Fixed::operator=( const Fixed &other )
         this->value = other.getRawBits();
     return *this;
     // this is obj c and other is obj b (situation in main.cpp: c = b)
+    // *this = the actual obj
 }
 
 int Fixed::getRawBits( void ) const
