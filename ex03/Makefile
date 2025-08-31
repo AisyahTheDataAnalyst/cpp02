@@ -6,7 +6,7 @@
 #    By: aimokhta <aimokhta@student.42kl.edu.my>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/27 12:20:17 by aimokhta          #+#    #+#              #
-#    Updated: 2025/08/31 17:49:47 by aimokhta         ###   ########.fr        #
+#    Updated: 2025/08/31 20:25:22 by aimokhta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,9 @@ CFLAG = -Wall -Werror -Wextra -std=c++98 -g -O0 -fsanitize=address
 
 SRC =	\
 		main.cpp \
-		Fixed.cpp
+		Fixed.cpp \
+		Point.cpp \
+		bsp.cpp
 
 OBJ_FOLDER = obj_files
 
