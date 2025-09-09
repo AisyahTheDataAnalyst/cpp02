@@ -6,7 +6,7 @@
 /*   By: aimokhta <aimokhta@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 17:51:39 by aimokhta          #+#    #+#             */
-/*   Updated: 2025/09/08 11:27:04 by aimokhta         ###   ########.fr       */
+/*   Updated: 2025/09/09 18:37:24 by aimokhta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,7 @@ Fixed::~Fixed()
 float Fixed::toFloat() const
 {
     return (float)this->_value / (1 << _fractionalBits);
-    // "compress" the float into int & "decompress" it back when needed
-    // toFloat keeps fractional precision (ex: 42.421875) - keep the decimals
+    // change from fixed point to float 
     //
     // for i_num = 2560 (originally 10)
     // (float)2560 / (1 << 8)
@@ -74,7 +73,8 @@ float Fixed::toFloat() const
 int Fixed::toInt() const
 {
     return this->_value >> _fractionalBits;
-    // toInt throws fractional part away (ex: 42 from 42.421875)
+    // change from fixed point to int
+    // can directly use >> that works with int family only, not float/double
 }
 
 int Fixed::getRawBits() const
@@ -92,3 +92,8 @@ std::ostream &operator<<(std::ostream &out, Fixed const &fixed)
     out << fixed.toFloat();
     return out;
 }
+// ostream meaning = o - output, stream - a flow of data
+// ostream - a class in C++ represents output stream , std::cout is the global object
+// out - any stream that youre currently writing into (std::cout / file opened by std::ofstream/ etc)
+// return type use reference, because std::cout cannot be copied if put without &
+//                           - also because enable operator can be chained - refrerring the same stream object

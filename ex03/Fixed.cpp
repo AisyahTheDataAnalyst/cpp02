@@ -6,7 +6,7 @@
 /*   By: aimokhta <aimokhta@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 17:52:32 by aimokhta          #+#    #+#             */
-/*   Updated: 2025/09/09 14:16:05 by aimokhta         ###   ########.fr       */
+/*   Updated: 2025/09/09 19:34:23 by aimokhta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ Fixed &Fixed::operator=( const Fixed &other )
 Fixed::~Fixed() {}
 
 
-
+// ----------------------------------------
 // converters
 
 float Fixed::toFloat() const
@@ -54,7 +54,7 @@ int Fixed::toInt() const
 }
 
 
-
+// ---------------------------------
 // setter & getter
 
 int Fixed::getRawBits() const
@@ -68,7 +68,7 @@ void Fixed::setRawBits( int const raw )
 }
 
 
-
+// -----------------------------------------------------
 // enabling to print out object's _value directly from obj only
 
 std::ostream &operator<<(std::ostream &out, Fixed const &fixed)
@@ -78,8 +78,8 @@ std::ostream &operator<<(std::ostream &out, Fixed const &fixed)
 }
 
 
-
-// operators
+// ----------------------------------------------------------
+// operators overloading
 
 bool Fixed::operator>( Fixed const &right_side ) const
 {
@@ -135,8 +135,6 @@ Fixed &Fixed::operator++()
 {
     this->_value++;
     return *this;
-    // ++a (pre-increment)
-    // increasing this->_value by 1 means +1/256 ≈ 0.00390625 in _value.
 }
 
 Fixed Fixed::operator++(int)      
@@ -144,14 +142,12 @@ Fixed Fixed::operator++(int)
     Fixed temp = *this;
     this->_value++;
     return temp;
-    // a++ (post-increment)
 }
 
 Fixed &Fixed::operator--()        
 {
     this->_value--;
     return *this;
-    // --a (pre-decrement)
 }
 
 
@@ -160,37 +156,36 @@ Fixed Fixed::operator--(int)
     Fixed temp = *this;
     this->_value--;
     return temp;
-    // a-- (post-decrement)
 }
 
 
-
+// 
 // min & max
 
-Fixed &Fixed::min( Fixed &fp_num_1, Fixed &fp_num_2 )
+Fixed &Fixed::min( Fixed &a, Fixed &b )
 {
-    if (fp_num_1 > fp_num_2)
-        return fp_num_2;
-    return fp_num_1;
+    if (a > b)
+        return b;
+    return a;
 }
 
-Fixed const &Fixed::min( Fixed const &fp_num_1, Fixed const &fp_num_2 )
+Fixed const &Fixed::min( Fixed const &a, Fixed const &b )
 {
-    if (fp_num_1 > fp_num_2)
-        return fp_num_2;
-    return fp_num_1;
+    if (a > b)
+        return b;
+    return a;
 }
 
-Fixed &Fixed::max( Fixed &fp_num_1, Fixed &fp_num_2 )
+Fixed &Fixed::max( Fixed &a, Fixed &b )
 {
-    if (fp_num_1 > fp_num_2)
-        return fp_num_1;
-    return fp_num_2;
+    if (a > b)
+        return a;
+    return b;
 }
 
-Fixed const &Fixed::max( Fixed const &fp_num_1, Fixed const &fp_num_2 )
+Fixed const &Fixed::max( Fixed const &a, Fixed const &b )
 {
-    if (fp_num_1 > fp_num_2)
-        return fp_num_1;
-    return fp_num_2;
+    if (a > b)
+        return a;
+    return b;
 }

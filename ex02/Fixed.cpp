@@ -6,7 +6,7 @@
 /*   By: aimokhta <aimokhta@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 17:04:41 by aimokhta          #+#    #+#             */
-/*   Updated: 2025/09/09 14:11:52 by aimokhta         ###   ########.fr       */
+/*   Updated: 2025/09/09 20:23:04 by aimokhta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ Fixed::Fixed( const int i_num )
 {
     this->_value = i_num << _fractionalBits;
 }
+
 Fixed::Fixed( const float f_num )
 {
     this->_value = roundf(f_num * (1 << _fractionalBits)); 
@@ -39,8 +40,9 @@ Fixed &Fixed::operator=( const Fixed &other )
 
 Fixed::~Fixed() {}
 
-
+//------------------------------------------------------------------------------------
 // converters
+
 float Fixed::toFloat() const
 {
     return (float)this->_value / (1 << _fractionalBits);
@@ -51,8 +53,7 @@ int Fixed::toInt() const
     return this->_value >> _fractionalBits;
 }
 
-
-
+// ------------------------------------------------------------------------------------
 // setter & getter
 
 int Fixed::getRawBits() const
@@ -65,9 +66,8 @@ void Fixed::setRawBits( int const raw )
     this->_value = raw;
 }
 
-
-
-// enabling to print out object's _value directly from obj only
+// ------------------------------------------------------------------------------------
+// enabling to print out object's _value directly from obj
 
 std::ostream &operator<<(std::ostream &out, Fixed const &fixed)
 {
@@ -76,8 +76,8 @@ std::ostream &operator<<(std::ostream &out, Fixed const &fixed)
 }
 
 
-
-// operators
+// -------------------------------------------------------------------------------------
+// operators overloading
 
 bool Fixed::operator>( Fixed const &right_side ) const
 {
@@ -135,14 +135,16 @@ Fixed &Fixed::operator++()
     return *this;
     // ++a (pre-increment)
     // increasing this->_value by 1 means +1/256 ≈ 0.00390625 in _value.
+    // pre - return type without reference - return the copy of the local variable , cannot use reference on local variable coz it will die after function ends
 }
 
-Fixed Fixed::operator++(int)      
+Fixed Fixed::operator++(int) // int is just a dummy parameter - not used at all - justa syntac trick so compiler know this is a post-increment, not pre-increment. compiler dosent care about the value int 
 {
-    Fixed temp = *this;
+    Fixed temp(*this); // saves the old value - syntax method: direct init - calls copy constrctor
     this->_value++;
     return temp;
     // a++ (post-increment)
+    // post - return copy of the old value - no reference
 }
 
 Fixed &Fixed::operator--()        
@@ -152,43 +154,42 @@ Fixed &Fixed::operator--()
     // --a (pre-decrement)
 }
 
-
 Fixed Fixed::operator--(int)      
 {
-    Fixed temp = *this;
+    Fixed temp = *this; // copy init - calls copy constructor // this syntax could allow implicit conversions (if *this were not already the same type).
     this->_value--;
     return temp;
     // a-- (post-decrement)
 }
 
 
-
+// ------------------------------------------------------------------------------------------
 // min & max
 
-Fixed &Fixed::min( Fixed &fp_num_1, Fixed &fp_num_2 )
+Fixed &Fixed::min( Fixed &a, Fixed &b )
 {
-    if (fp_num_1 > fp_num_2)
-        return fp_num_2;
-    return fp_num_1;
+    if (a > b)
+        return b;
+    return a;
 }
 
-Fixed const &Fixed::min( Fixed const &fp_num_1, Fixed const &fp_num_2 )
+Fixed const &Fixed::min( Fixed const &a, Fixed const &b )
 {
-    if (fp_num_1 > fp_num_2)
-        return fp_num_2;
-    return fp_num_1;
+    if (a > b)
+        return b;
+    return a;
 }
 
-Fixed &Fixed::max( Fixed &fp_num_1, Fixed &fp_num_2 )
+Fixed &Fixed::max( Fixed &a, Fixed &b )
 {
-    if (fp_num_1 > fp_num_2)
-        return fp_num_1;
-    return fp_num_2;
+    if (a > b)
+        return a;
+    return b;
 }
 
-Fixed const &Fixed::max( Fixed const &fp_num_1, Fixed const &fp_num_2 )
+Fixed const &Fixed::max( Fixed const &a, Fixed const &b )
 {
-    if (fp_num_1 > fp_num_2)
-        return fp_num_1;
-    return fp_num_2;
+    if (a > b)
+        return a;
+    return b;
 }

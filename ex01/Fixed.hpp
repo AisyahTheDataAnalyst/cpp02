@@ -6,7 +6,7 @@
 /*   By: aimokhta <aimokhta@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 17:52:00 by aimokhta          #+#    #+#             */
-/*   Updated: 2025/09/08 11:27:50 by aimokhta         ###   ########.fr       */
+/*   Updated: 2025/09/09 20:18:26 by aimokhta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ class Fixed
 {
     private:
         int _value;
-        static const int _fractionalBits = 8; // 8 bits means how many decimals you want in binary
+        static const int _fractionalBits = 8; // 8 bits means how many decimals places you want in binary
     
     public:
         Fixed();

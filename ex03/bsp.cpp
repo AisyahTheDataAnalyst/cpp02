@@ -6,7 +6,7 @@
 /*   By: aimokhta <aimokhta@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 17:52:26 by aimokhta          #+#    #+#             */
-/*   Updated: 2025/08/31 20:44:05 by aimokhta         ###   ########.fr       */
+/*   Updated: 2025/09/09 20:13:03 by aimokhta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static Fixed area( Point const &a, Point const &b, Point const &c)
 
 // area of the big triangle ABC: A=Area(A,B,C)
 // if point is inside triangle: A=A1+A2+A3
-// if any of A!/A2/A3 == 0, the point is on edge or outside
+// if any of A1/A2/A3 == 0, the point is on edge or outside
 bool bsp(Point const a, Point const b, Point const c, Point const point)
 {
     Fixed A = area(a, b, c);
@@ -46,7 +46,7 @@ bool bsp(Point const a, Point const b, Point const c, Point const point)
     Fixed A2 = area(a, point, c);
     Fixed A3 = area(a, b, point);
 
-    if (A1 == Fixed(0) || A2 == Fixed(0) || A3 == Fixed(0))
+    if (A1 == Fixed(0) || A2 == Fixed(0) || A3 == Fixed(0)) // if equals to 0 = on edge
         return false;
-    return (A == A1 + A2 + A3);
+    return (A == A1 + A2 + A3); // inside - A is a sum of all 3, outside = A > sum of all 3
 }

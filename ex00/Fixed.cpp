@@ -6,7 +6,7 @@
 /*   By: aimokhta <aimokhta@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/30 14:52:06 by aimokhta          #+#    #+#             */
-/*   Updated: 2025/09/08 10:40:00 by aimokhta         ###   ########.fr       */
+/*   Updated: 2025/09/09 14:35:07 by aimokhta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ Fixed::Fixed( void ) : _value(0)
     std::cout << "Default constructor called" << std::endl;
 }
 
-Fixed::Fixed( const Fixed &other )
+Fixed::Fixed( const Fixed &other ) // : _value(other._value) {} // - this manual way also can
 {
     std::cout << "Copy constructor called" << std::endl;
     
@@ -25,14 +25,13 @@ Fixed::Fixed( const Fixed &other )
     // use assignment
     // this = pointer to the curr obj, *this = the actual obj
     // =other - calls assignment operator fn
-    // value = other.value;  --> another manual way to do it
     // situation in main.cpp: Fixed b(a);
 }
 
 // syntax for copy assignment operator's prototype
 // Fixed & - return type (reference to curr obj = *this)
 // operator= - special function name that defines what '=' means for this class
-// “I’m defining what happens when you assign one Fixed object to another with =.”
+// “I’m defining what happens when you assign one Fixed object to another object with =.”
 // () - parameter - the obj you're copying from
 // &other (in param) = passing by reference
 // &other in {} = address of pointer, coz 'this' is pointer to curr obj, prevent self assign ( a = a )
