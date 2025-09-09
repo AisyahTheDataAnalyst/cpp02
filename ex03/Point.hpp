@@ -6,7 +6,7 @@
 /*   By: aimokhta <aimokhta@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 17:52:58 by aimokhta          #+#    #+#             */
-/*   Updated: 2025/08/31 20:36:09 by aimokhta         ###   ########.fr       */
+/*   Updated: 2025/09/09 14:13:42 by aimokhta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@
 class Point
 {
     private:
-        Fixed const x;
-        Fixed const y;
+        Fixed const _x;
+        Fixed const _y;
 
     public:
         Point();
-        Point( float const _x, float const _y );
+        Point( float const x, float const y );
         Point( const Point &other );
         Point &operator=( const Point &other );
         ~Point();

@@ -6,7 +6,7 @@
 /*   By: aimokhta <aimokhta@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 17:04:41 by aimokhta          #+#    #+#             */
-/*   Updated: 2025/08/31 17:49:02 by aimokhta         ###   ########.fr       */
+/*   Updated: 2025/09/09 14:11:52 by aimokhta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 //constructor & destructors
 
-Fixed::Fixed() : value(0) {}
+Fixed::Fixed() : _value(0) {}
 
 Fixed::Fixed( const int i_num )
 {
-    this->value = i_num << fractionalBits;
+    this->_value = i_num << _fractionalBits;
 }
 Fixed::Fixed( const float f_num )
 {
-    this->value = roundf(f_num * (1 << fractionalBits)); 
+    this->_value = roundf(f_num * (1 << _fractionalBits)); 
 }
 
 Fixed::Fixed( const Fixed &other )
@@ -33,24 +33,22 @@ Fixed::Fixed( const Fixed &other )
 Fixed &Fixed::operator=( const Fixed &other )
 {
     if (this != &other)
-        this->value = other.getRawBits();
+        this->_value = other.getRawBits();
     return *this;
 }
 
 Fixed::~Fixed() {}
 
 
-
 // converters
-
 float Fixed::toFloat() const
 {
-    return (float)this->value / (1 << fractionalBits);
+    return (float)this->_value / (1 << _fractionalBits);
 }
 
 int Fixed::toInt() const
 {
-    return this->value >> fractionalBits;
+    return this->_value >> _fractionalBits;
 }
 
 
@@ -59,17 +57,17 @@ int Fixed::toInt() const
 
 int Fixed::getRawBits() const
 {
-    return(this->value);
+    return(this->_value);
 }
 
 void Fixed::setRawBits( int const raw )
 {
-    this->value = raw;
+    this->_value = raw;
 }
 
 
 
-// enabling to print out object's value directly from obj only
+// enabling to print out object's _value directly from obj only
 
 std::ostream &operator<<(std::ostream &out, Fixed const &fixed)
 {
@@ -83,32 +81,32 @@ std::ostream &operator<<(std::ostream &out, Fixed const &fixed)
 
 bool Fixed::operator>( Fixed const &right_side ) const
 {
-    return this->value > right_side.value;
+    return this->_value > right_side._value;
 }
 
 bool Fixed::operator<( Fixed const &right_side ) const
 {
-    return this->value < right_side.value;
+    return this->_value < right_side._value;
 }
 
 bool Fixed::operator>=( Fixed const &right_side ) const
 {
-    return this->value >= right_side.value;
+    return this->_value >= right_side._value;
 }
 
 bool Fixed::operator<=( Fixed const &right_side ) const
 {
-    return this->value <= right_side.value;    
+    return this->_value <= right_side._value;    
 }
 
 bool Fixed::operator==( Fixed const &right_side ) const
 {
-    return this->value == right_side.value;
+    return this->_value == right_side._value;
 }
 
 bool Fixed::operator!=( Fixed const &right_side ) const
 {
-    return this->value != right_side.value;
+    return this->_value != right_side._value;
 }
 
 Fixed Fixed::operator+( Fixed const &right_side ) const
@@ -133,23 +131,23 @@ Fixed Fixed::operator/( Fixed const &right_side ) const
 
 Fixed &Fixed::operator++()
 {
-    this->value++;
+    this->_value++;
     return *this;
     // ++a (pre-increment)
-    // increasing this->value by 1 means +1/256 ≈ 0.00390625 in value.
+    // increasing this->_value by 1 means +1/256 ≈ 0.00390625 in _value.
 }
 
 Fixed Fixed::operator++(int)      
 {
     Fixed temp = *this;
-    this->value++;
+    this->_value++;
     return temp;
     // a++ (post-increment)
 }
 
 Fixed &Fixed::operator--()        
 {
-    this->value--;
+    this->_value--;
     return *this;
     // --a (pre-decrement)
 }
@@ -158,7 +156,7 @@ Fixed &Fixed::operator--()
 Fixed Fixed::operator--(int)      
 {
     Fixed temp = *this;
-    this->value--;
+    this->_value--;
     return temp;
     // a-- (post-decrement)
 }

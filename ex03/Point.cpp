@@ -6,17 +6,17 @@
 /*   By: aimokhta <aimokhta@student.42kl.edu.my>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 17:52:55 by aimokhta          #+#    #+#             */
-/*   Updated: 2025/08/31 19:46:05 by aimokhta         ###   ########.fr       */
+/*   Updated: 2025/09/09 14:14:38 by aimokhta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Point.hpp"
 
-Point::Point() : x(0), y(0) {}
+Point::Point() : _x(0), _y(0) {}
 
-Point::Point( float const _x, float const _y ) : x(_x), y(_y) {}
+Point::Point( float const x, float const y ) : _x(x), _y(y) {}
 
-Point::Point( Point const &other ) : x(other.x), y(other.y) {}
+Point::Point( Point const &other ) : _x(other._x), _y(other._y) {}
 // {
 //     this->x = other.x;
 //     this->y = other.y;
@@ -33,11 +33,11 @@ Point::~Point() {}
 
 Fixed Point::getX() const
 {
-    return this->x;    
+    return this->_x;    
 }
 
 Fixed Point::getY() const
 {
-    return this->y;
+    return this->_y;
 }
 
